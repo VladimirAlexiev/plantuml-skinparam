@@ -1,0 +1,17 @@
+    144 font-params
+    120 stereotype-font
+     87 color-params
+     43 sequence-params
+     29 global-font/color
+     26 border-thickness
+     15 icon-params
+     12 attribute-params
+     11 stereotype-params
+     11 other-params
+     10 layout-params
+      9 alignment
+      7 ARROW
+      6 text-params
+      5 style
+      3 link-params
+      1 COLOR
