@@ -18,28 +18,29 @@ Here we attempt to reduce the gazillion parameters to groups by using regexps:
 
 The groupings are defined in `skinparam.pl`:
 
-| group | constituents |
-|-|-|
-| FONT               | `Font(Color|Name|Size|Style)` |
-| COLOR              | `(|Background|Border)Color` |
-| ARROW              | `Arrow(|Lollipop)(COLOR|FONT|Thickness)` |
-| ENTITY             | `(Agent|Archimate|Artifact|Boundary|Card|Cloud|Control|Database|DesignedDomain|Domain|Entity|File|Folder|Frame|Interface|Machine|Node(?!sep)|Queue|Rectangle|Requirement|Stack|Storage|Usecase)` |
-| layout-params      | `Dpi|MinClassWidth|SameClassWidth|Nodesep|Ranksep|(Box|Participant|)Padding|Linetype|SwimlaneWidth` |
-| link-params        | `HyperlinkCOLOR|HyperlinkUnderline|SvglinkTarget` |
-| text-params        | `DefaultMonospacedFONT|Guillemet|Handwritten|MaxAsciiMessageLength|MaxMessageSize|TabSize` |
-| alignment          | `ResponseMessageBelowArrow|(Default|Note|(Sequence|State)Message)TextAlignment|(Arrow|Package|Sequence|State)(Message|Reference|Title)Alignment` |
-| other-params       | `^BackgroundColor|COLORArrowSeparationSpace|GenericDisplay|FixCircleLabelOverlapping|LifelineStrategy|PageMargin|(TitleBorder|)RoundCorner|SwimlaneWrapTitleWidth|(|Note)Shadowing|WrapWidth` |
-| attribute-params   | `(Class|Object|State)AttributeFONT` |
-| border-thickness   | `(ENTITY|Archimate|Activity|Class|Component|Diagram|Legend|Note|Object|Package|Partition|Sequence(Actor|Divider|Group|LifeLine|Participant|Reference)|Swimlane|Title|Usecase)BorderThickness` |
-| icon-params        | `Icon(IEMandatory|Package|Private|Protected|Public)COLOR|ClassAttributeIconSize|CircledCharacter(FONT|Radius)` |
-| color-params       | `(ENTITY|Actor|Designed|Biddable|Lexical|Activity(|Start|End|Bar|Diamond)|Class(|Header)|Collections|Component|Diagram|Enum|Generic|Interface|Note|Object|Package|Page|PageExternal|Participant|Partition|PathHover|Swimlane(|Title)|State(|Start|End|Bar)|Timing|Usecase(|Actor))COLOR` |
-| font-params        | `(ENTITY|Actor|Activity(|Diamond)|Class(|Header)|Collections|Component|Diagram|Enum|Generic|Interface|Note|Object|Package|PathHover|Participant|Partition|SwimlaneTitle|State|Timing|Usecase(|Actor))FONT` |
-| arrow-params       | `(ENTITY|Activity(|Diamond)|Class(|Header)|Collections|Diagram|Enum|Generic|Interface|Note|PathHover|Partition|Swimlane|State|Timing|Usecase(|Actor))ARROW` |
-| sequence-params    | `Sequence(|Actor|Box|Delay|Divider|Group(|Body|Header)|LifeLine|NewpageSeparator|Participant|Reference(|Header)|Title)(ARROW|COLOR|FONT)|SequenceParticipant` |
-| stereotype-font    | `(ENTITY|Actor|Class|Component|Interface|Object|Package|Participant|Sequence|Usecase(|Actor))StereotypeFONT` |
-| stereotype-params  | `Stereotype(Position|[ACEIN]COLOR)` |
-| style              | `(Component|Condition(|End)|Package|)Style` |
-| global-font/color  | `Monochrome|(Caption|Default|Footer|Header|Legend|Title)(FONT|COLOR)` |
+```
+==group==          | ==regexp==
+FONT               Font(Color|Name|Size|Style)
+COLOR              (|Background|Border)Color
+ARROW              Arrow(|Lollipop)(COLOR|FONT|Thickness)
+ENTITY             (Agent|Archimate|Artifact|Boundary|Card|Cloud|Control|Database|DesignedDomain|Domain|Entity|File|Folder|Frame|Interface|Machine|Node(?!sep)|Queue|Rectangle|Requirement|Stack|Storage|Usecase)
+layout-params      Dpi|MinClassWidth|SameClassWidth|Nodesep|Ranksep|(Box|Participant|)Padding|Linetype|SwimlaneWidth
+link-params        HyperlinkCOLOR|HyperlinkUnderline|SvglinkTarget
+text-params        DefaultMonospacedFONT|Guillemet|Handwritten|MaxAsciiMessageLength|MaxMessageSize|TabSize
+alignment          ResponseMessageBelowArrow|(Default|Note|(Sequence|State)Message)TextAlignment|(Arrow|Package|Sequence|State)(Message|Reference|Title)Alignment
+other-params       ^BackgroundColor|COLORArrowSeparationSpace|GenericDisplay|FixCircleLabelOverlapping|LifelineStrategy|PageMargin|(TitleBorder|)RoundCorner|SwimlaneWrapTitleWidth|(|Note)Shadowing|WrapWidth
+attribute-params   (Class|Object|State)AttributeFONT
+border-thickness   (ENTITY|Archimate|Activity|Class|Component|Diagram|Legend|Note|Object|Package|Partition|Sequence(Actor|Divider|Group|LifeLine|Participant|Reference)|Swimlane|Title|Usecase)BorderThickness
+icon-params        Icon(IEMandatory|Package|Private|Protected|Public)COLOR|ClassAttributeIconSize|CircledCharacter(FONT|Radius)
+color-params       (ENTITY|Actor|Designed|Biddable|Lexical|Activity(|Start|End|Bar|Diamond)|Class(|Header)|Collections|Component|Diagram|Enum|Generic|Interface|Note|Object|Package|Page|PageExternal|Participant|Partition|PathHover|Swimlane(|Title)|State(|Start|End|Bar)|Timing|Usecase(|Actor))COLOR
+font-params        (ENTITY|Actor|Activity(|Diamond)|Class(|Header)|Collections|Component|Diagram|Enum|Generic|Interface|Note|Object|Package|PathHover|Participant|Partition|SwimlaneTitle|State|Timing|Usecase(|Actor))FONT
+arrow-params       (ENTITY|Activity(|Diamond)|Class(|Header)|Collections|Diagram|Enum|Generic|Interface|Note|PathHover|Partition|Swimlane|State|Timing|Usecase(|Actor))ARROW
+sequence-params    Sequence(|Actor|Box|Delay|Divider|Group(|Body|Header)|LifeLine|NewpageSeparator|Participant|Reference(|Header)|Title)(ARROW|COLOR|FONT)|SequenceParticipant
+stereotype-font    (ENTITY|Actor|Class|Component|Interface|Object|Package|Participant|Sequence|Usecase(|Actor))StereotypeFONT
+stereotype-params  Stereotype(Position|[ACEIN]COLOR)
+style              (Component|Condition(|End)|Package|)Style
+global-font/color  Monochrome|(Caption|Default|Footer|Header|Legend|Title)(FONT|COLOR)
+```
 
 Let's read the color-params group (there are 87 such):
 - COLOR has the regex `(|Background|Border)Color`, which means the following params: `Color BackgroundColor BorderColor`
@@ -52,9 +53,10 @@ ENTITY, which itself expands to these (`Node` but not `Nodesep`, which is a layo
 
 and further
  
-    Actor Designed Biddable Lexical Activity ActivityStart ActivityEnd ActivityBar ActivityDiamond
-    Class ClassHeader Collections Component Diagram Enum Generic Interface Note Object Package Page PageExternal 
-    Participant Partition PathHover Swimlane SwimlaneTitle State StateStart StateEnd StateBar Timing Usecase UsecaseActor
+    Actor Designed Biddable Lexical Activity ActivityStart ActivityEnd ActivityBar ActivityDiamond 
+    Class ClassHeader Collections Component Diagram Enum Generic Interface Note Object 
+    Package Page PageExternal Participant Partition PathHover Swimlane SwimlaneTitle 
+    State StateStart StateEnd StateBar Timing Usecase UsecaseActor
 
 This doesn't mean **each** of the COLOR params is applicable to each of these things. Eg let's check for "Activity":
 
